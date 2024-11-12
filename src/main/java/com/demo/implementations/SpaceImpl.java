@@ -1,9 +1,9 @@
 package com.demo.implementations;
 
 import com.demo.model.Space;
-import com.demo.services.CreateSpaceService;
+import com.demo.services.SpaceService;
 
-public class CreateSpaceImpl implements CreateSpaceService {
+public class SpaceImpl implements SpaceService {
 
     @Override
     public boolean isSpaceTitleValid(String title) {
@@ -19,5 +19,13 @@ public class CreateSpaceImpl implements CreateSpaceService {
         // IMPLEMENTAR 
 
         return null;
+    }
+
+    @Override
+    public boolean deleteSpace(Long idSpace) {
+        
+        // IMPLEMENTAR 
+
+        return false;
     }  
 }

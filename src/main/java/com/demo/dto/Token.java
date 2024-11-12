@@ -1,17 +1,21 @@
 package com.demo.dto;
 
+import java.util.List;
+
+import com.demo.model.Permission;
+
 public class Token {
     
     private Long id;
 
-    private String name;
+    private List<Permission> permissions;
 
-    public String getName() {
-        return name;
+    public List<Permission> getPermissions() {
+        return permissions;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     public Long getId() {
