@@ -9,12 +9,12 @@ public class EmailValidatorTests {
 
     @Test
     void validateInvalidEmails() {
-        assertEquals(MyEmailValidator.validate(""), false); // vazio
-        assertEquals(MyEmailValidator.validate("email.com"), false); // falta '@'
-        assertEquals(MyEmailValidator.validate("@example.com"), false); // '@' no início
-        assertEquals(MyEmailValidator.validate("example@.com"), false); // '.' logo após '@'
-        assertEquals(MyEmailValidator.validate("example@com."), false); // '.' no final
-        assertEquals(MyEmailValidator.validate("example@com"), false); // falta '.'
+        assertEquals(MyEmailValidator.validate(""), false);
+        assertEquals(MyEmailValidator.validate("email.com"), false); 
+        assertEquals(MyEmailValidator.validate("@example.com"), false); 
+        assertEquals(MyEmailValidator.validate("example@.com"), false); 
+        assertEquals(MyEmailValidator.validate("example@com."), false); 
+        assertEquals(MyEmailValidator.validate("example@com"), false);
     }
 
     @Test
