@@ -29,6 +29,10 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "idPermission")
     private Permission permission;
+    
+    @ManyToOne
+    @JoinColumn(name = "space")
+    private Space space;
 
     public Long getId() {
         return id;

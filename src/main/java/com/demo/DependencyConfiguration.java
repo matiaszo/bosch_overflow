@@ -17,7 +17,7 @@ public class DependencyConfiguration {
     }
 
     @Bean
-    public CreateUserService createUserService(){
+    public UserService createUserService(){
         return new CreateUserImpl();
     }
 
