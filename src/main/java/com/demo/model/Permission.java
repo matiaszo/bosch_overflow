@@ -13,6 +13,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+// COMO FUNCIONA:
+// se a pessoa nao tiver nenhuma linha da tabela permissions vinculada a ela, ela é apenas leitora.
+// se a pessoa tiver uma permissao e adm = 0, ela participa do espaço.
+// se a pessoa tiver uma permissao e adm = 1, ela participa do espaço e é ADM.
+
 @Entity
 @Table(name = "tbPermission")
 public class Permission {
@@ -21,10 +26,7 @@ public class Permission {
     private Long id;
 
     @Column
-    private Long idUser;
-
-    @Column
-    private Long idSpace;
+    private Boolean adm;
 
     @OneToMany(mappedBy = "permission")
     private Set<Answer> answers = new HashSet<>();
@@ -48,19 +50,11 @@ public class Permission {
         this.id = id;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Boolean getAdm() {
+        return adm;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
-    }
-
-    public Long getIdSpace() {
-        return idSpace;
-    }
-
-    public void setIdSpace(Long idSpace) {
-        this.idSpace = idSpace;
+    public void setAdm(Boolean adm) {
+        this.adm = adm;
     }
 }
