@@ -1,23 +1,70 @@
 package com.demo.implementations;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.crypto.SecretKey;
+
 import com.demo.dto.Token;
 import com.demo.services.JWTService;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+
+
 public class JWTImpl implements JWTService<Token> {
+
+    private final String SECRET_KEY = "ouqebfdouiebfouqewfnuoqewnhfouewnfouewnh";
+    private final long EXPIRATION_TIME = 1000 * 60 * 60;
 
     @Override
     public String get(Token token) {
-        
-        // IMPLEMENTAR
+        var claims = new HashMap<String, Object>();
 
-        return null;
+        claims.put("id", token.getId());
+        claims.put("permissions", token.getPermissions());
+
+        return get(claims);
     }
 
     @Override
     public Token validate(String jwt) {
-        
-        // IMPLEMENTAR
+        try {
+            var map = validateJwt(jwt);
 
-        return null;
+            Token token = new Token();
+            token.setId(Long.valueOf(map.get("id").toString()));
+
+            return token;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    private String get(Map<String, Object> customClaims) {
+        SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+        return Jwts.builder()
+                .claims()
+                .add(customClaims)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .and()
+                .signWith(key)
+                .compact();
+    }
+
+    private Map<String, Object> validateJwt(String jwt) {
+        SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+        Claims claims = Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
+
+        return new HashMap<>(claims);
     }
 }
