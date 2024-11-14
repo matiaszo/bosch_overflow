@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.demo.model.Permission;
+
 import com.demo.model.User;
 
 @Repository
@@ -20,5 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM Permission u WHERE u.user = :searchValue")
     List<Permission> searchPermissions(@Param("searchValue") Long searchValue);
 
-   List<User> findByEdv(String edv);
+    @Query("SELECT u FROM Permission u WHERE u.user = :searchValue and u.space = :searchSpace")
+    List<Permission> searchPermissionsSpaces(@Param("searchValue") Long searchValue, @Param("searchSpace") Long searchSpace);
+
+    List<User> findByEdv(String edv);
 }

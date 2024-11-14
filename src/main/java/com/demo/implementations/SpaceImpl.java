@@ -2,6 +2,7 @@ package com.demo.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.demo.dto.Token;
 import com.demo.model.Space;
 import com.demo.repositories.SpaceRepository;
 import com.demo.services.SpaceService;
@@ -34,7 +35,7 @@ public class SpaceImpl implements SpaceService {
 
         space.setTitle(title);
         space.setDescription(description);
-        
+
         return space;
 
     }
@@ -42,9 +43,9 @@ public class SpaceImpl implements SpaceService {
     @Override
     public boolean deleteSpace(Long idSpace) {
         
-        if (idSpace.isEmpty()){
+        // if (idSpace.isEmpty()){
             
-        }
+        // }
 
         return false;
     }  
