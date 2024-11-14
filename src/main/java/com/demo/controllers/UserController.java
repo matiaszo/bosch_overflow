@@ -1,5 +1,7 @@
 package com.demo.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,11 +36,15 @@ public class UserController {
     }
 
     @GetMapping("?{query}&{page}&{size}")
-    public String FindUser(@PathVariable String query, Integer page, Integer size) {
+    public List<User> FindUser(@PathVariable String query, Integer page, Integer size) {
 
         var users = userService.getUsers(query, 1, 5);
 
+<<<<<<< HEAD
         return "User create!";
+=======
+        return users;
+>>>>>>> c3a7e313416dced066b9480a1c542344cc235d31
     }
 
 }

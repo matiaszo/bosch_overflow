@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.demo.model.User;
+import com.demo.repositories.UserRepository;
 import com.demo.services.UserService;
 import com.demo.services.PasswordService;
 
-public class CreateUserImpl implements UserService {
+public class UserImpl implements UserService {
+
+    @Autowired
+    UserRepository userRepository;
     
     @Autowired
     PasswordService passService;
@@ -30,8 +34,9 @@ public class CreateUserImpl implements UserService {
 
     @Override
     public List<User> getUsers(String query, int page, int size) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
+        var users = userRepository.searchUser(query);
+
+        return users;
     }
     
 }
