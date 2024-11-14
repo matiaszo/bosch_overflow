@@ -43,9 +43,9 @@ public class SpaceImpl implements SpaceService {
     @Override
     public boolean deleteSpace(Long idSpace) {
         
-        if (idSpace.isEmpty()){
+        // if (idSpace.isEmpty()){
             
-        }
+        // }
 
         return false;
     }  
