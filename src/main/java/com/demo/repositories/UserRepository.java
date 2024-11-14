@@ -25,4 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<Permission> searchPermissionsSpaces(@Param("searchValue") Long searchValue, @Param("searchSpace") Long searchSpace);
 
     List<User> findByEdv(String edv);
+
+    User findById(long id);
 }
