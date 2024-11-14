@@ -21,14 +21,14 @@ public class QuestionImpl implements QuestionService {
 
         Space space = spaceRepository.findById(spaceId);
 
-        Question pergunta = new Question();
+        Question questions = new Question();
 
-        pergunta.setQuestion(question);
-        pergunta.setSpace(space);
+        questions.setQuestion(question);
+        questions.setSpace(space);
 
-        questionRepository.save(pergunta);
+        questionRepository.save(questions);
         
-        return pergunta;
+        return questions;
     }
 
     @Override

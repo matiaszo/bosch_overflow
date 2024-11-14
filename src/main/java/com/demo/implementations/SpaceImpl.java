@@ -1,5 +1,7 @@
 package com.demo.implementations;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.demo.dto.Token;
@@ -59,6 +61,14 @@ public class SpaceImpl implements SpaceService {
         spaceRepository.delete(spaces);
 
         return true;
+    }
+
+    @Override
+    public List<Space> getSpaces(String query, int page, int size) {
+        
+        var spaces = spaceRepository.findByTitle(query);
+
+        return spaces;
     }  
 
     
