@@ -38,7 +38,6 @@ public class UserController {
 
         var users = userService.getUsers(query, 1, 5);
 
-
         return "User create!";
     }
 
