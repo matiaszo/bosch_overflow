@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.demo.model.Question;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {}
+public interface QuestionRepository extends JpaRepository<Question, Long> {
+    Question findById(long id);
+}

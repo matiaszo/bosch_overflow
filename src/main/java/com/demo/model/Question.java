@@ -49,4 +49,12 @@ public class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
+    
+    public Space getSpace() {
+        return space;
+    }
+
+    public void setSpace(Space space) {
+        this.space = space;
+    }
 }

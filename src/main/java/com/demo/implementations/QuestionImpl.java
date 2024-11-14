@@ -1,24 +1,46 @@
 package com.demo.implementations;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.demo.model.Question;
+import com.demo.model.Space;
+import com.demo.repositories.QuestionRepository;
+import com.demo.repositories.SpaceRepository;
 import com.demo.services.QuestionService;
 
 public class QuestionImpl implements QuestionService {
 
-    @Override
-    public Question createNewQuestion(String question) {
+    @Autowired
+    SpaceRepository spaceRepository;
 
-        // IMPLEMENTAR
+    @Autowired
+    QuestionRepository questionRepository;
+
+    @Override
+    public Question createNewQuestion(String question, long spaceId) {
+
+        Space space = spaceRepository.findById(spaceId);
+
+        Question pergunta = new Question();
+
+        pergunta.setQuestion(question);
+        pergunta.setSpace(space);
+
+        questionRepository.save(pergunta);
         
-        return null;
+        return pergunta;
     }
 
     @Override
-    public boolean deleteQuestion(Long idQuestion) {
+    public boolean deleteQuestion(long idQuestion) {
         
-        // IMPLEMENTAR
+        Question question = questionRepository.findById(idQuestion);
+
+        if (question == null) {
+            return false;
+        }
         
-        return false;
+        return true;
     }
     
 }
