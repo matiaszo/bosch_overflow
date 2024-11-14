@@ -40,11 +40,7 @@ public class UserController {
 
         var users = userService.getUsers(query, 1, 5);
 
-<<<<<<< HEAD
-        return "User create!";
-=======
         return users;
->>>>>>> c3a7e313416dced066b9480a1c542344cc235d31
     }
 
 }
