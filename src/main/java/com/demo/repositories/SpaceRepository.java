@@ -11,5 +11,5 @@ import com.demo.model.Space;
 public interface SpaceRepository extends JpaRepository<Space, Long> {
 
     List<Space> findByTitulo(String titulo);
-    List<Space> findById(String id);
+    Space findById(long id);
 }
