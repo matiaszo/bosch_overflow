@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.demo.dto.Token;
 import com.demo.model.Space;
 import com.demo.repositories.SpaceRepository;
+import com.demo.services.PermissionService;
 import com.demo.services.SpaceService;
 
 public class SpaceImpl implements SpaceService {
@@ -12,10 +13,13 @@ public class SpaceImpl implements SpaceService {
     @Autowired
     SpaceRepository spaceRepository;
 
+    @Autowired
+    PermissionService permissionService;
+
     @Override
     public boolean isSpaceTitleValid(String title) {
 
-        var spaces = spaceRepository.findByTitulo(title);
+        var spaces = spaceRepository.findByTitle(title);
     
         if (spaces.isEmpty()) {
             return false;
@@ -32,21 +36,30 @@ public class SpaceImpl implements SpaceService {
         }
 
         Space space = new Space();
-
+        
         space.setTitle(title);
         space.setDescription(description);
-
+        
+        permissionService.createNewPermission(token.getId(), space.getId());
+        spaceRepository.saveAndFlush(space);
+        
         return space;
 
     }
 
     @Override
-    public boolean deleteSpace(Long idSpace) {
+    public boolean deleteSpace(long idSpace) {
         
-        // if (idSpace.isEmpty()){
-            
-        // }
+       Space spaces = spaceRepository.findById(idSpace);
 
-        return false;
+        if (spaces == null) {
+            return false;
+        }
+
+        spaceRepository.delete(spaces);
+
+        return true;
     }  
+
+    
 }
