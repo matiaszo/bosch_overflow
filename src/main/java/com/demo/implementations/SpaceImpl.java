@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import com.demo.dto.Token;
 import com.demo.model.Space;
@@ -13,6 +14,7 @@ import com.demo.repositories.SpaceRepository;
 import com.demo.services.PermissionService;
 import com.demo.services.SpaceService;
 
+@EnableSpringDataWebSupport
 public class SpaceImpl implements SpaceService {
 
     @Autowired
@@ -45,8 +47,9 @@ public class SpaceImpl implements SpaceService {
         space.setTitle(title);
         space.setDescription(description);
         
+        spaceRepository.save(space);
+        
         permissionService.createNewPermission(token.getId(), space.getId());
-        spaceRepository.saveAndFlush(space);
         
         return space;
 

@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.SpaceData;
+import com.demo.dto.Token;
+import com.demo.implementations.JWTImpl;
 import com.demo.model.Space;
 import com.demo.model.User;
 import com.demo.repositories.SpaceRepository;
@@ -31,7 +33,10 @@ public class SpaceController {
     @Autowired
     SpaceRepository spaceRepository;
 
-    @GetMapping("?{query}&{page}&{size}")
+    @Autowired
+    JWTImpl jwtImpl;
+
+    @GetMapping
     public Page<Space> GetSpace(@PathVariable String query,@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
         return spaceService.getSpaces(query, page, size);
     }
@@ -39,7 +44,13 @@ public class SpaceController {
     @PostMapping
     public String postMethodName(@RequestBody SpaceData data) {
 
-        Space space = spaceService.createNewSpace(data.token(), data.title(), data.description());
+        Token token = jwtImpl.validate(data.token());
+
+        if (token == null) {
+            return "Invalid token!";
+        }
+
+        Space space = spaceService.createNewSpace(token, data.title(), data.description());
 
         spaceRepository.save(space);
 

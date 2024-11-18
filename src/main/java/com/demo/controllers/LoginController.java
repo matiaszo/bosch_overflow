@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.LoginData;
-import com.demo.dto.Token;
 import com.demo.repositories.UserRepository;
+import com.demo.services.LoginService;
 
 @RestController
 @RequestMapping("/auth")
@@ -19,29 +19,14 @@ public class LoginController {
     UserRepository userRepository;
 
     @Autowired
+    LoginService loginService;
+
+    @Autowired
     PasswordEncoder encoder;
 
     @PostMapping
     public String login(@RequestBody LoginData data) {
-
-        // if (token == null) {
-        //     return "Invalido";
-        // }
-
-        var users = userRepository.searchEdv(data.edv());
-
-        if (users.isEmpty()) {
-            return "The user do not exists.";
-        }
-
-        var indexUser = users.get(0);
-
-        if (!encoder.matches(data.pass(), indexUser.getPass())) {
-            return "The password is incorrect.";
-        }
-
-        return "ok!";
-
+       return loginService.login(data.edv(), data.pass());
     }
 
 }

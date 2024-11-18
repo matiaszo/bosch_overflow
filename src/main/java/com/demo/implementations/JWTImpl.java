@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 
 public class JWTImpl implements JWTService<Token> {
 
-    private final String SECRET_KEY = "chave";
+    private final String SECRET_KEY = "ouqebfdouiebfouqewfnuoqewnhfouewnfouewnh";
     private final long EXPIRATION_TIME = 1000 * 60 * 60;
 
     @Override
@@ -25,7 +25,6 @@ public class JWTImpl implements JWTService<Token> {
         var claims = new HashMap<String, Object>();
 
         claims.put("id", token.getId());
-        claims.put("permissions", token.getPermissions());
 
         return get(claims);
     }
