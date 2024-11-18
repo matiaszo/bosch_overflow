@@ -19,6 +19,12 @@ public class UserImpl implements UserService {
 
     @Override
     public User createNewUser(String name, String edv, String email, String pass) {
+
+        var users = userRepository.searchUser(edv);
+
+        if (!users.isEmpty()) {
+            return null;
+        }
         
         User user = new User();
 

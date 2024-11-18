@@ -30,6 +30,10 @@ public class UserController {
 
         User user = userService.createNewUser(data.name(), data.edv(), data.email(), data.pass());
 
+        if (user == null) {
+            return "User is already registered!";
+        }
+
         userRepository.save(user);
 
         return "User create!";

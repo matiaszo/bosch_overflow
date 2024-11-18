@@ -2,6 +2,8 @@ package com.demo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.demo.implementations.*;
 import com.demo.services.*;
@@ -49,5 +51,10 @@ public class DependencyConfiguration {
     @Bean
     public PermissionService permissionService(){
         return new PermissionImpl();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(8);
     }
 }

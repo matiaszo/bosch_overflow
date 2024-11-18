@@ -35,7 +35,7 @@ public class Question {
     private Space space;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "tb_user")
     private User user;
 
     public User getUser() {
