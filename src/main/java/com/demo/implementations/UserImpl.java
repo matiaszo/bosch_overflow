@@ -3,6 +3,9 @@ package com.demo.implementations;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.demo.model.User;
 import com.demo.repositories.UserRepository;
@@ -39,10 +42,9 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers(String query, int page, int size) {
-        var users = userRepository.searchUser(query);
-
-        return users;
+    public Page<User> getUsers(String query, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.searchUser(query, pageable);
     }
     
 }
