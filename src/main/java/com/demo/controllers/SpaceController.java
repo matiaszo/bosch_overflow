@@ -3,7 +3,9 @@ package com.demo.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.dto.SpaceData;
 import com.demo.model.Space;
+import com.demo.model.User;
 import com.demo.repositories.SpaceRepository;
 import com.demo.services.SpaceService;
 
@@ -26,16 +28,23 @@ public class SpaceController {
     @Autowired
     SpaceService spaceService;
 
+    @Autowired
+    SpaceRepository spaceRepository;
+
     @GetMapping("?{query}&{page}&{size}")
     public Page<Space> GetSpace(@PathVariable String query,@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
         return spaceService.getSpaces(query, page, size);
     }
 
     @PostMapping
-    public String postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
+    public String postMethodName(@RequestBody SpaceData data) {
+
+        Space user = spaceService.createNewSpace(data.token(), data.title(), data.description());
+
+        spaceRepository.save(user);
+
+        return "Space create!";
         
-        return entity;
     }
     
     
