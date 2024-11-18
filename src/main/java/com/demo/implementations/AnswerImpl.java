@@ -18,16 +18,17 @@ public class AnswerImpl implements AnswerService {
 
     @Override
     public Answer createNewAnswer(long questionId, String answer) {
-
-        Question question = questionRepository.findById(questionId);
-
+        Question question = questionRepository.findById(questionId).orElse(null);  
+    
+        if (question == null) {
+            return null;
+        }
+    
         Answer reply = new Answer();
-
         reply.setAnswer(answer);
         reply.setQuestion(question);
-
+    
         answerRepository.save(reply);
-
         return reply;
     }
     

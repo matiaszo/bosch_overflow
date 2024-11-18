@@ -1,6 +1,14 @@
 package com.demo.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.SpaceData;
@@ -8,20 +16,8 @@ import com.demo.dto.Token;
 import com.demo.implementations.JWTImpl;
 import com.demo.implementations.PermissionImpl;
 import com.demo.model.Space;
-import com.demo.model.User;
 import com.demo.repositories.SpaceRepository;
 import com.demo.services.SpaceService;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -36,13 +32,13 @@ public class SpaceController {
     SpaceRepository spaceRepository;
 
     @Autowired
-    JWTImpl jwtImpl;
-
-    @Autowired
     PermissionImpl permissionImpl;
 
+    @Autowired
+    JWTImpl jwtImpl;
+
     @GetMapping
-    public Page<Space> GetSpace(@RequestParam String query,@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
+    public Page<Space> GetSpace(@RequestParam String query, @RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
         return spaceService.getSpaces(query, page, size);
     }
 
@@ -78,7 +74,7 @@ public class SpaceController {
         
         boolean trash = spaceService.deleteSpace(id);  
 
-        if (level<2) {
+        if (level < 2) {
             return "You dont have permission to do that";
         }
 
