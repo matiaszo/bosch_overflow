@@ -24,10 +24,10 @@ public class SpaceImpl implements SpaceService {
         var spaces = spaceRepository.findByTitle(title);
     
         if (spaces.isEmpty()) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
