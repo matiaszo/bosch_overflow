@@ -3,6 +3,9 @@ package com.demo.implementations;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.demo.dto.Token;
 import com.demo.model.Space;
@@ -64,11 +67,10 @@ public class SpaceImpl implements SpaceService {
     }
 
     @Override
-    public List<Space> getSpaces(String query, int page, int size) {
+    public Page<Space> getSpaces(String query, int page, int size) {
         
-        var spaces = spaceRepository.findByTitle(query);
-
-        return spaces;
+        Pageable pageable = PageRequest.of(page, size);
+        return spaceRepository.searchSpace(query, pageable);
     }  
 
     

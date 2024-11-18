@@ -3,6 +3,8 @@ package com.demo.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,8 +17,8 @@ import com.demo.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT u FROM User u WHERE u.name = :searchValue or u.email = :searchValue or u.edv = :searchValue")
-    List<User> searchUser(@Param("searchValue") String searchValue);
+    @Query("SELECT u FROM User u WHERE u.name LIKE %:searchValue% OR u.email LIKE %:searchValue% OR u.edv LIKE %:searchValue%")
+    Page<User> searchUser(@Param("searchValue") String searchValue, Pageable pageable);
 
     @Query("SELECT u FROM Permission u WHERE u.user = :searchValue")
     List<Permission> searchPermissions(@Param("searchValue") Long searchValue);
