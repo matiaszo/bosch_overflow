@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import com.demo.model.User;
 import com.demo.repositories.UserRepository;
 import com.demo.services.UserService;
 import com.demo.services.PasswordService;
 
+@EnableSpringDataWebSupport
 public class UserImpl implements UserService {
 
     @Autowired

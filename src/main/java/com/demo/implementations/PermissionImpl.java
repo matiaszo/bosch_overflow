@@ -45,10 +45,10 @@ public class PermissionImpl implements PermissionService {
 
         List<Permission> permissionUsers = userRepository.searchPermissionsSpaces(idUser, idSpace);
 
-        
         if (permissionUsers.isEmpty()) {
             return false;
         }
+        
         return false;
     }
     

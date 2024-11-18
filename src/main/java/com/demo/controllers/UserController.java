@@ -40,7 +40,7 @@ public class UserController {
         return "User create!";
     }
 
-    @GetMapping("?{query}&{page}&{size}")
+    @GetMapping
     public Page<User> FindUser(@RequestParam String query,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
         return userService.getUsers(query, page, size);

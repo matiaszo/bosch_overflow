@@ -39,9 +39,9 @@ public class SpaceController {
     @PostMapping
     public String postMethodName(@RequestBody SpaceData data) {
 
-        Space user = spaceService.createNewSpace(data.token(), data.title(), data.description());
+        Space space = spaceService.createNewSpace(data.token(), data.title(), data.description());
 
-        spaceRepository.save(user);
+        spaceRepository.save(space);
 
         return "Space create!";
         

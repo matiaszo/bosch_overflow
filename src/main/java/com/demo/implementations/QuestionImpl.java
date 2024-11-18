@@ -42,5 +42,17 @@ public class QuestionImpl implements QuestionService {
         
         return true;
     }
+
+    @Override
+    public Question getQuestionById(long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getQuestionById'");
+    }
+
+    @Override
+    public Question getQuestion(Space space, int page, int size) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getQuestion'");
+    }
     
 }
