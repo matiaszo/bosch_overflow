@@ -7,7 +7,6 @@ import com.demo.dto.Token;
 import com.demo.repositories.UserRepository;
 import com.demo.services.JWTService;
 import com.demo.services.LoginService;
-import com.demo.services.PasswordService;
 
 public class LoginImpl implements LoginService {
 

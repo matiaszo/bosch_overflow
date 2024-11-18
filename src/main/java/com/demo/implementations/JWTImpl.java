@@ -30,6 +30,7 @@ public class JWTImpl implements JWTService<Token> {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public Token validate(String jwt) {
         try {
             var map = validateJwt(jwt);
@@ -38,7 +39,7 @@ public class JWTImpl implements JWTService<Token> {
             token.setId(Long.valueOf(map.get("id").toString()));
 
             return token;
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             ex.printStackTrace();
             return null;
         }

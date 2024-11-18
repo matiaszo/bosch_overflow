@@ -1,7 +1,5 @@
 package com.demo.implementations;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,11 +26,7 @@ public class SpaceImpl implements SpaceService {
 
         var spaces = spaceRepository.findByTitle(title);
     
-        if (spaces.isEmpty()) {
-            return true;
-        }
-
-        return false;
+        return spaces.isEmpty();
     }
 
     @Override

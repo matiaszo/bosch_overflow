@@ -19,8 +19,6 @@ import com.demo.model.Space;
 import com.demo.repositories.SpaceRepository;
 import com.demo.services.SpaceService;
 
-
-
 @RestController
 @RequestMapping("/spaces")
 public class SpaceController { 
