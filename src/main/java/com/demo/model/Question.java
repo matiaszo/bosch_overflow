@@ -34,6 +34,18 @@ public class Question {
     @JoinColumn(name = "space")
     private Space space;
 
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

@@ -3,6 +3,6 @@ package com.demo.services;
 import com.demo.model.Question;
 
 public interface QuestionService {
-    public Question createNewQuestion(String question, long spaceId);
+    public Question createNewQuestion(String question, long spaceId, long userId);
     public boolean deleteQuestion(long id);
 }

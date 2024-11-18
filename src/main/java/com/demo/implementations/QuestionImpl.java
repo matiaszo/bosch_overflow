@@ -17,7 +17,7 @@ public class QuestionImpl implements QuestionService {
     QuestionRepository questionRepository;
 
     @Override
-    public Question createNewQuestion(String question, long spaceId) {
+    public Question createNewQuestion(String question, long spaceId, long userId) {
 
         Space space = spaceRepository.findById(spaceId);
 
