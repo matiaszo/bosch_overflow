@@ -39,7 +39,7 @@ public class SpaceImpl implements SpaceService {
     public Space createNewSpace(Token token, String title, String description) {
 
         if (!isSpaceTitleValid(title)) {
-            return null;
+            return null; 
         }
 
         Space space = new Space();
@@ -48,7 +48,7 @@ public class SpaceImpl implements SpaceService {
         space.setDescription(description);
         
         spaceRepository.save(space);
-        
+
         permissionService.createNewPermission(token.getId(), space.getId());
         
         return space;

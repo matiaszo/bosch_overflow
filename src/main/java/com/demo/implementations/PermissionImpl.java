@@ -41,15 +41,17 @@ public class PermissionImpl implements PermissionService {
     }
 
     @Override
-    public boolean validatePermission(Long idUser, Long idSpace) {
+    public int validatePermission(Long idUser, Long idSpace) {
 
         List<Permission> permissionUsers = userRepository.searchPermissionsSpaces(idUser, idSpace);
 
         if (permissionUsers.isEmpty()) {
-            return false;
+            return 0;
         }
-        
-        return false;
+        if (permissionUsers.get(0).getAdm().equals(false)) {
+            return 1;
+        }
+        return 2;
     }
     
 }

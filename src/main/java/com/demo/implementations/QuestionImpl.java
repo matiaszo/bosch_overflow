@@ -25,8 +25,6 @@ public class QuestionImpl implements QuestionService {
 
         questions.setQuestion(question);
         questions.setSpace(space);
-
-        questionRepository.save(questions);
         
         return questions;
     }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.dto.SpaceData;
 import com.demo.dto.Token;
 import com.demo.implementations.JWTImpl;
+import com.demo.implementations.PermissionImpl;
 import com.demo.model.Space;
 import com.demo.model.User;
 import com.demo.repositories.SpaceRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,8 +38,11 @@ public class SpaceController {
     @Autowired
     JWTImpl jwtImpl;
 
+    @Autowired
+    PermissionImpl permissionImpl;
+
     @GetMapping
-    public Page<Space> GetSpace(@PathVariable String query,@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
+    public Page<Space> GetSpace(@RequestParam String query,@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
         return spaceService.getSpaces(query, page, size);
     }
 
@@ -56,6 +61,32 @@ public class SpaceController {
 
         return "Space create!";
         
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteSpace(@PathVariable Long id, @RequestParam String token) {
+
+        Token myToken = jwtImpl.validate(token);
+        
+        if (myToken == null) {
+            return "invalid token";
+        }
+
+        long userId = myToken.getId();
+
+        int level = permissionImpl.validatePermission(userId, id); 
+        
+        boolean trash = spaceService.deleteSpace(id);  
+
+        if (level<2) {
+            return "You dont have permission to do that";
+        }
+
+        if (trash) {
+            return "delete ok";
+        }
+
+        return "Space not found!";
     }
     
     
