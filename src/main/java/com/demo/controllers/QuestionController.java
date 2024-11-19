@@ -7,7 +7,6 @@ import com.demo.dto.QuestionData;
 import com.demo.dto.Token;
 import com.demo.implementations.JWTImpl;
 import com.demo.model.Question;
-import com.demo.model.Space;
 import com.demo.repositories.QuestionRepository;
 import com.demo.services.QuestionService;
 

@@ -8,9 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.demo.model.Question;
-import com.demo.model.Space;
-
-
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {

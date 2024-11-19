@@ -64,10 +64,10 @@ public class QuestionImpl implements QuestionService {
         }
 
         questionRepository.delete(question);
+        questionRepository.save(question);
+        
         return true; 
     }
-
-
 
     @Override
     public Question getQuestionById(long id) {
@@ -75,15 +75,14 @@ public class QuestionImpl implements QuestionService {
     Question question = questionRepository.findById(id);
 
     return question;
-}
-
+    }
 
     @Override
     public Page<Question> getQuestion(Long space, int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         return questionRepository.searchQuestion(space, pageable);
-}
+    }
 
     
 }
