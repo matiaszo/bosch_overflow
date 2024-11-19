@@ -27,15 +27,15 @@ public class Question {
     private Set<Answer> answers = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "idPermission")
+    @JoinColumn(name = "id_permission")
     private Permission permission;
     
     @ManyToOne
-    @JoinColumn(name = "space")
+    @JoinColumn(name = "id_space")
     private Space space;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "id_user")
     private User user;
 
     public User getUser() {

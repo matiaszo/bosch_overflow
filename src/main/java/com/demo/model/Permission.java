@@ -35,11 +35,11 @@ public class Permission {
     private Set<Question> questions = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
+    @JoinColumn(name = "id_user")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "idSpace")
+    @JoinColumn(name = "id_space")
     private Space space;
 
     public Long getId() {

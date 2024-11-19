@@ -32,9 +32,10 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Permission> permissions = new HashSet<>();
-
+    
     @OneToMany(mappedBy = "user")
-    private Set<Question> question = new HashSet<>();
+    private Set<Question> questions = new HashSet<>();
+    
 
     public String getEdv() {
         return edv;

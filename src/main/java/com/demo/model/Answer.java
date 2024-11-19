@@ -17,11 +17,11 @@ public class Answer {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idQuestion")
+    @JoinColumn(name = "id_question")
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name = "idPermission")
+    @JoinColumn(name = "id_permission")
     private Permission permission;
 
     public Permission getPermission() {

@@ -26,9 +26,9 @@ public class Space {
 
     @OneToMany(mappedBy = "space")
     private Set<Question> questions = new HashSet<>();
-
+    
     @OneToMany(mappedBy = "space")
-    private Set<Permission> permissions = new HashSet<>();
+    private Set<Permission> permissions = new HashSet<>();    
 
     public Long getId() {
         return id;
