@@ -27,17 +27,17 @@ public class UserController {
     UserRepository userRepository;
 
     @PostMapping
-    public String createUser(@RequestBody UserData data) {
+    public User createUser(@RequestBody UserData data) {
 
         User user = userService.createNewUser(data.name(), data.edv(), data.email(), data.pass());
 
         if (user == null) {
-            return "User is already registered!";
+            return null;
         }
 
         userRepository.save(user);
 
-        return "User create!";
+        return user;
     }
 
     @GetMapping

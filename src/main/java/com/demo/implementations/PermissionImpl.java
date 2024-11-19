@@ -24,7 +24,7 @@ public class PermissionImpl implements PermissionService {
     PermissionRepository permissionRepository;
 
     @Override
-    public Permission createNewPermission(long idUser, long idSpace) {
+    public Permission createNewPermission(long idUser, long idSpace, boolean adm) {
 
         User user = userRepository.findById(idUser);
         Space space = spaceRepository.findById(idSpace);
@@ -33,7 +33,7 @@ public class PermissionImpl implements PermissionService {
 
         permission.setUser(user);
         permission.setSpace(space);
-        permission.setAdm(true);
+        permission.setAdm(adm);
 
         permissionRepository.saveAndFlush(permission);
 

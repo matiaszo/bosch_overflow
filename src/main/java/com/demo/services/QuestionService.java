@@ -9,5 +9,5 @@ public interface QuestionService {
     public Question createNewQuestion(String question, long spaceId, long userId);
     public boolean deleteQuestion(long id);
     public Question getQuestionById(long id);
-    Page<Question> getQuestion(Space space, int page, int size);
+    Page<Question> getQuestion(Long space, int page, int size);
 }

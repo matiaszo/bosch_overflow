@@ -23,6 +23,7 @@ import com.demo.services.SpaceService;
 @RequestMapping("/spaces")
 public class SpaceController { 
 
+
     @Autowired
     SpaceService spaceService;
 
@@ -34,6 +35,7 @@ public class SpaceController {
 
     @Autowired
     JWTImpl jwtImpl;
+
 
     @GetMapping
     public Page<Space> GetSpace(@RequestParam String query, @RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {

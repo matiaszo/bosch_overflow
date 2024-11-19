@@ -43,17 +43,18 @@ public class QuestionController {
     @Autowired
     JWTImpl jwtImpl;
 
+    @GetMapping("/{id}")
+    public Question GetQuestionById(@PathVariable Long id) {
+
+        return questionService.getQuestionById(id);
+    }
+
     @GetMapping
     public Page<Question> GetQuestion(@RequestParam String query, @RequestParam long spaceId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
-        Space space = spaceRepository.findById(spaceId);
-    
-        if (space == null) {
-            return Page.empty();
-        }
-
-        return questionService.getQuestion(space, page, size);
+        return questionService.getQuestion(spaceId, page, size);
     }
+
 
     @PostMapping
     public String postMethodName(@RequestBody QuestionData data) {

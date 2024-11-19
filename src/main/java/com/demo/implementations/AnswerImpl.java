@@ -18,7 +18,7 @@ public class AnswerImpl implements AnswerService {
 
     @Override
     public Answer createNewAnswer(long questionId, String answer) {
-        Question question = questionRepository.findById(questionId).orElse(null);  
+        Question question = questionRepository.findById(questionId);  
     
         if (question == null) {
             return null;

@@ -20,10 +20,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.name LIKE %:searchValue% OR u.email LIKE %:searchValue% OR u.edv LIKE %:searchValue%")
     Page<User> searchUser(@Param("searchValue") String searchValue, Pageable pageable);
 
-    @Query("SELECT u FROM Permission u WHERE u.user = :searchValue")
+    @Query("SELECT u FROM Permission u WHERE u.user.id = :searchValue")
     List<Permission> searchPermissions(@Param("searchValue") Long searchValue);
 
-    @Query("SELECT u FROM Permission u WHERE u.user = :searchValue and u.space = :searchSpace")
+    @Query("SELECT u FROM Permission u WHERE u.user.id = :searchValue and u.space.id = :searchSpace")
     List<Permission> searchPermissionsSpaces(@Param("searchValue") Long searchValue, @Param("searchSpace") Long searchSpace);
 
     @Query("SELECT u FROM User u WHERE u.edv = :searchValue")

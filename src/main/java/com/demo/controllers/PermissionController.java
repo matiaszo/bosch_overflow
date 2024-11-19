@@ -23,7 +23,7 @@ public class PermissionController {
     @PostMapping
     public Permission postMethodName(@RequestBody PermissionData data) {
         
-        Permission permission = permissionService.createNewPermission(data.userId(), data.spaceId());
+        Permission permission = permissionService.createNewPermission(data.userId(), data.spaceId(), data.adm());
         
         return permission;
     }

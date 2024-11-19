@@ -3,7 +3,8 @@ package com.demo.dto;
 public record PermissionData(
 
     long userId,
-    long spaceId
+    long spaceId,
+    boolean adm
 ) 
 
 {}

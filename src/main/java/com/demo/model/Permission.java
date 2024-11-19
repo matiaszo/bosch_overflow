@@ -31,9 +31,6 @@ public class Permission {
     @OneToMany(mappedBy = "permission")
     private Set<Answer> answers = new HashSet<>();
 
-    @OneToMany(mappedBy = "permission")
-    private Set<Question> questions = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -66,13 +63,6 @@ public class Permission {
         this.answers = answers;
     }
 
-    public Set<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
-    }
 
     public User getUser() {
         return user;

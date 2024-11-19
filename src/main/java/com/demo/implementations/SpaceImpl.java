@@ -43,7 +43,7 @@ public class SpaceImpl implements SpaceService {
         
         spaceRepository.save(space);
 
-        permissionService.createNewPermission(token.getId(), space.getId());
+        permissionService.createNewPermission(token.getId(), space.getId(), true);
         
         return space;
 

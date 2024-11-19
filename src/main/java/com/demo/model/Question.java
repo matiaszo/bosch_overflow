@@ -26,9 +26,8 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private Set<Answer> answers = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "id_permission")
-    private Permission permission;
+    @Column
+    private Integer permission;
     
     @ManyToOne
     @JoinColumn(name = "id_space")
@@ -78,11 +77,12 @@ public class Question {
         this.answers = answers;
     }
 
-    public Permission getPermission() {
+    public Integer getPermission() {
         return permission;
     }
 
-    public void setPermission(Permission permission) {
+    public void setPermission(Integer permission) {
         this.permission = permission;
     }
+
 }

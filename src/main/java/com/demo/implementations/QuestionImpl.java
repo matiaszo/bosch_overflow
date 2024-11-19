@@ -7,14 +7,19 @@ import org.springframework.data.domain.Pageable;
 
 import com.demo.model.Question;
 import com.demo.model.Space;
+import com.demo.model.User;
 import com.demo.repositories.QuestionRepository;
 import com.demo.repositories.SpaceRepository;
+import com.demo.repositories.UserRepository;
 import com.demo.services.QuestionService;
 
 public class QuestionImpl implements QuestionService {
 
     @Autowired
     SpaceRepository spaceRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     QuestionRepository questionRepository;
@@ -26,6 +31,8 @@ public class QuestionImpl implements QuestionService {
     public Question createNewQuestion(String question, long spaceId, long userId) {
 
     Space space = spaceRepository.findById(spaceId);
+
+    User user = userRepository.findById(userId);
     
     if (space == null) {
         return null; 
@@ -40,6 +47,8 @@ public class QuestionImpl implements QuestionService {
     Question questions = new Question();
     questions.setQuestion(question);
     questions.setSpace(space);
+    questions.setUser(user);
+    questions.setPermission(permission);
 
     return questions;
 }
@@ -48,7 +57,7 @@ public class QuestionImpl implements QuestionService {
     @Override
     public boolean deleteQuestion(long idQuestion) {
 
-        Question question = questionRepository.findById(idQuestion).orElse(null);
+        Question question = questionRepository.findById(idQuestion);
 
         if (question == null) {
             return false; 
@@ -63,14 +72,14 @@ public class QuestionImpl implements QuestionService {
     @Override
     public Question getQuestionById(long id) {
 
-    Question question = questionRepository.findById(id).orElse(null);
+    Question question = questionRepository.findById(id);
 
     return question;
 }
 
 
     @Override
-    public Page<Question> getQuestion(Space space, int page, int size) {
+    public Page<Question> getQuestion(Long space, int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         return questionRepository.searchQuestion(space, pageable);

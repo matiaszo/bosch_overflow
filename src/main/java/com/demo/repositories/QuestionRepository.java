@@ -11,11 +11,14 @@ import com.demo.model.Question;
 import com.demo.model.Space;
 
 
+
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    @Query("SELECT q FROM Question q WHERE q.space = :searchValue")
-    Page<Question> searchQuestion(@Param("searchValue") Space searchValue, Pageable pageable);
+    @Query("SELECT q FROM Question q WHERE q.space.id = :searchValue")
+    Page<Question> searchQuestion(@Param("searchValue") Long searchValue, Pageable pageable);
+
+    Question findById(long id);
 
 }
 
