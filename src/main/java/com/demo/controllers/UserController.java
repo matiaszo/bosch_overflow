@@ -29,15 +29,23 @@ public class UserController {
     @PostMapping
     public User createUser(@RequestBody UserData data) {
 
-        User user = userService.createNewUser(data.name(), data.edv(), data.email(), data.pass());
+        boolean senha = MyPasswordValidator.Validate(data.pass());
 
-        if (user == null) {
-            return null;
+        if (senha) {
+            
+            User user = userService.createNewUser(data.name(), data.edv(), data.email(), data.pass());
+    
+            if (user == null) {
+                return null;
+            }
+    
+            userRepository.save(user);
+    
+            return user;
         }
 
-        userRepository.save(user);
+        return null;
 
-        return user;
     }
 
     @GetMapping

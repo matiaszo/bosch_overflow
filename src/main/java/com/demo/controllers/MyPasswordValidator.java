@@ -1,6 +1,7 @@
 package com.demo.controllers;
 
 public class MyPasswordValidator {
+    
     public static boolean Validate(String password) {
         if (password.length() < 5)
             return false;
