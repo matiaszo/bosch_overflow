@@ -21,5 +21,4 @@ public class LoginController {
     public String login(@RequestBody LoginData data) {
        return loginService.login(data.edv(), data.pass());
     }
-
 }
