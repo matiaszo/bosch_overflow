@@ -31,21 +31,22 @@
 
     <div class="p-4 text-dark position-absolute top-0 d-flex justify-content-between w-100" style="margin-top: 90px;">
       <a href="../Space/" class="navbar-brand text-dark fw-bold fs-3">NOME DO ESPAÇO</a>
-      
-      <button class="p-3" style="border: none; background-color: transparent;">
+
+      <button data-bs-target="#showUsers" data-bs-toggle="modal" class="p-3"
+        style="border: none; background-color: transparent;">
         <img src="../../assets/users.png" class="" style="width: 70px;" alt="users">
       </button>
     </div>
 
-    <div class="d-flex align-items-center flex-column gap-3">
+    <div class="d-flex align-items-center flex-column gap-3 p-2">
 
       <!-- COMPONENTE PARA PERGUNTA -->
-      <div class="card w-50">
+      <div class="card col-12 col-md-9 col-lg-6">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">TITULO DA PERGUNTA</h5>
           <p class="card-text">Pra que serve tantos códigos? Se a vida não é programada e as melhores coisas não tem
             lógica</p>
-          <a href="../Question/" class="btn btn-primary align-self-end">VER RESPOSTAS</a>
+          <a href="../Question/" class="btn btn-secondary align-self-end">VER RESPOSTAS</a>
         </div>
       </div>
       <!-- ------------------------- -->
@@ -68,10 +69,13 @@
           </div>
           <div class="modal-body">
 
-            <div class="d-flex flex-column gap-3">
+            <!-- FORMULARIO PARA ENVIAR NOVA PERGUNTA -->
+            <form id="new_question_forms" action="" class="d-flex flex-column gap-3">
               <input class="p-2" type="text" placeholder="Titulo">
               <textarea class="form-control" style="resize: none;" rows="4" placeholder="Pergunta"></textarea>
-            </div>
+            </form>
+            <!-- ------------------------------------ -->
+
 
           </div>
           <div class="modal-footer">
@@ -94,7 +98,43 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-danger" data-bs-target="#postQuestionModal" data-bs-toggle="modal">Voltar</button>
-            <button class="btn btn-success" data-bs-dismiss="modal">Enviar</button>
+            <button id="new_question_button" class="btn btn-success" data-bs-dismiss="modal">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="showUsers" aria-hidden="true" aria-labelledby="showUsersLabel" tabindex="-1">
+      <div class="modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="showUsersLabel">Usuários</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+
+              <div class="card w-100">
+                <ul class="list-group list-group-flush">
+
+                  <!-- COMPONENTE DE USUÁRIO -->
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h6>NOME DO USUÁRIO</h6>
+                      <div class="d-flex flex-column flex-lg-row justify-content-end align-items-end gap-2">
+                        <button id="set_admin_button" class="btn btn-light">Adminstrador</button>
+                        <button id="set_member_button" class="btn btn-light">Membro</button>
+                        <button id="set_none_button" class="btn btn-light">Desconhecido</button>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- ---------------------- -->
+
+
+                </ul>
+            </div>
           </div>
         </div>
       </div>
