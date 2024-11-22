@@ -33,13 +33,22 @@ public class UserController {
 
         if (senha) {
             
-            User user = userService.createNewUser(data.name(), data.edv(), data.email(), data.pass());
+            System.out.println("senha valida");
+
+            User user = userService.createNewUser(data);
+            System.out.println("criou");
     
             if (user == null) {
                 return null;
             }
+
+            System.out.println("nao e nulo");
+
     
             userRepository.save(user);
+
+            System.out.println("salvou");
+
     
             return user;
         }

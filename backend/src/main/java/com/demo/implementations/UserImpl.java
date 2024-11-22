@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
+import com.demo.dto.UserData;
 import com.demo.model.User;
 import com.demo.repositories.UserRepository;
 import com.demo.services.UserService;
@@ -21,9 +22,10 @@ public class UserImpl implements UserService {
     PasswordService passService;
 
     @Override
-    public User createNewUser(String name, String edv, String email, String pass) {
+    public User createNewUser(UserData data) {  // ! NÃO HAVIA SALVAMENTO PELO REPOSITORY DO OBJETO DE USER CRIADO
+                                                // ! E O PARÂMETRO NÃO ERA UM DTO MAS SIM QUATRO STRINGS 
 
-        var users = userRepository.searchEdv(edv);
+        var users = userRepository.searchEdv(data.edv());
 
         if (!users.isEmpty()) {
             return null;
@@ -31,12 +33,14 @@ public class UserImpl implements UserService {
         
         User user = new User();
 
-        String cripto = passService.encryptPassword(pass);
+        String cripto = passService.encryptPassword(data.pass());
 
-        user.setName(name);
-        user.setEdv(edv);
-        user.setEmail(email);
+        user.setName(data.name());
+        user.setEdv(data.edv());
+        user.setEmail(data.email());
         user.setPass(cripto);
+
+        userRepository.save(user);
 
         return user;
     }
