@@ -1,58 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <title>Home</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Home</title>
+</head>
 
-    <body>
-        <header class="position-fixed w-100 bg-light">
-            <nav class="navbar border-bottom border-5 border-black shadow">
-                <div class="container-fluid d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="../../assets/BoschOverflowLogo.png" alt="logoBoschOverflow" height="50">
-                        <a href="../Home/" class="navbar-brand fs-2 text-danger fw-bold">BoschOverflow</a>
-                    </div>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+<body>
+
+    <div class="modal fade" id="postSpaceModal" aria-hidden="true" aria-labelledby="postQuestionModalLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="postQuestionModalLabel">Criar Novo Espaço</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- FORMULARIO PARA ENVIAR NOVA PERGUNTA -->
+                    <form id="new_question_forms" action="" class="d-flex flex-column gap-3">
+                        <input class="form-control p-2" type="text" placeholder="Digite aqui o nome do novo espaço...">
+                        <button class="btn btn-primary" onclick="postSpace()">ENVIAR</button>
                     </form>
                 </div>
-            </nav>
-        </header>
-
-
-
-        <main class="d-flex flex-column justify-content-center" style="min-height: 100vh;">
-            <div class="d-flex align-items-center flex-column gap-3 p-2">
-
-                <!-- COMPONENTE PARA ESPAÇO -->
-                <div class="card col-12 col-md-9 col-lg-6">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">NOME DO ESPAÇO</h5>
-                        <p class="card-text">O importante é não parar de questionar. Curiosidade tem sua própria razão para
-                            existir (DESCRIÇÃO)</p>
-                        <a id="access_space_button" href="../Space/" class="btn btn-primary align-self-end">ACESSAR</a>
-                    </div>
-                </div>
-                <!-- --------------------- -->
-
             </div>
-        </main>
+        </div>
+    </div>
+
+    <!-- ------------------------------------ -->
+
+    <header class=" w-100 bg-light mb-5">
+        <nav class="navbar border-bottom border-5 border-black shadow">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../../assets/BoschOverflowLogo.png" alt="logoBoschOverflow" height="50">
+                    <a href="../Home/" class="navbar-brand fs-2 text-danger fw-bold">BoschOverflow</a>
+                </div>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <main class="d-flex flex-column justify-content-start gap-5 align-items-center" style="min-height: 100vh;">
+        <div class="mt-5">
+            <button class="btn btn-primary" data-bs-target="#postSpaceModal" data-bs-toggle="modal">CRIAR NOVO ESPAÇO</button>
+        </div>
+        <div class="d-flex align-items-center flex-column gap-3 p-2">
+
+            <!-- COMPONENTE PARA ESPAÇO -->
+            <div class="card col-12 col-md-9 col-lg-6">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">NOME DO ESPAÇO</h5>
+                    <p class="card-text">O importante é não parar de questionar. Curiosidade tem sua
+                        própria razão para
+                        existir (DESCRIÇÃO)</p>
+                    <a id="access_space_button" href="../Space/" class="btn btn-primary align-self-end">ACESSAR</a>
+                </div>
+            </div>
+            <!-- --------------------- -->
+
+        </div>
+    </main>
 
 
 
-        <footer>
+    <footer>
 
-        </footer>
+    </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
 
 </html>
