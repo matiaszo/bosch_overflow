@@ -1,6 +1,7 @@
 package com.demo.services;
 
+import com.demo.dto.LoginData;
 
 public interface LoginService {
-    String login(String edv, String password);
+    String login(LoginData data);
 }

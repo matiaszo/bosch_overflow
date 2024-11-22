@@ -19,6 +19,6 @@ public class LoginController {
 
     @PostMapping
     public String login(@RequestBody LoginData data) {
-       return loginService.login(data.edv(), data.pass());
+       return loginService.login(data);
     }
 }
