@@ -32,9 +32,12 @@ async function postSpace() {
 
     console.log(result)
 
-    alert(result)
-
-    window.location.reload()
+    if (result == "Já existe um espaço com este nome!") {
+        alert(result)
+    } else {
+        alert(result)
+        window.location.reload()
+    }
 }
 
 window.postSpace = postSpace
