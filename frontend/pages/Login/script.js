@@ -25,9 +25,20 @@ async function loginUser() {
 
     let result = await response.text();
 
-    console.log(result)
+    if (result === "The user do not exists." || result === "The password is incorrect.") {
+        alert(`${result}`)
+        console.log(result);
+        
+    } else {
+        
+        localStorage.setItem("token", "Bearer " + result)
+        window.location.href = "../Home"
+        alert(`Login realizado com sucesso!`)
+        console.log(result);
+        
+    }
 
-    localStorage.setItem("token", "Bearer " + result)
+    console.log(result)
 }
 
 window.loginUser = loginUser
