@@ -22,7 +22,8 @@
                 <div class="modal-body">
                     <!-- FORMULARIO PARA ENVIAR NOVA PERGUNTA -->
                     <form id="new_question_forms" action="" class="d-flex flex-column gap-3">
-                        <input class="form-control p-2" type="text" placeholder="Digite aqui o nome do novo espaço...">
+                        <input class="form-control p-2" type="text" id="spaceTitle" placeholder="Digite aqui o nome do novo espaço...">
+                        <textarea class="form-control p-2" name="" id="spaceDesc"></textarea>
                         <button class="btn btn-primary" onclick="postSpace()">ENVIAR</button>
                     </form>
                 </div>
@@ -66,8 +67,6 @@
 
         </div>
     </main>
-
-
 
     <footer>
 

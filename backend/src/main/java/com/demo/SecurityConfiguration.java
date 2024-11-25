@@ -8,12 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.example.demo.dto.Token;
-import com.example.demo.filters.JWTAuthenticationFilter;
-import com.example.demo.services.JWTService;
+import com.demo.dto.Token;
+import com.demo.filters.JWTAuthenticationFilter;
+import com.demo.services.JWTService;
 
 
 @Configuration
