@@ -70,17 +70,16 @@
           <div class="modal-body">
 
             <!-- FORMULARIO PARA ENVIAR NOVA PERGUNTA -->
-            <form id="new_question_forms" action="" class="d-flex flex-column gap-3">
-              <input class="p-2" type="text" placeholder="Titulo">
-              <textarea class="form-control" style="resize: none;" rows="4" placeholder="Pergunta"></textarea>
-            </form>
+            <div id="new_question_forms" action="" class="d-flex flex-column gap-3">
+              <textarea class="form-control" id="questionText" style="resize: none;" rows="4" placeholder="Pergunta"></textarea>
+            </div>
             <!-- ------------------------------------ -->
 
 
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" data-bs-target="#postQuestionConfirmation"
-              data-bs-toggle="modal">Enviar</button>
+              data-bs-toggle="modal" onclick="postQuestion()">Enviar</button>
           </div>
         </div>
       </div>

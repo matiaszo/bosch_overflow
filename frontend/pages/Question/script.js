@@ -1,8 +1,9 @@
 const baseUrl = "http://localhost:8080"
 
-async function postQuestion() {
+async function postSpace() {
 
-    let question = document.getElementById("questionText").value
+    let title = document.getElementById("spaceTitle").value
+    let description = document.getElementById("spaceDesc").value
     let token = localStorage.getItem("token").split(" ")
 
     token = token[1]
