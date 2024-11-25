@@ -30,4 +30,4 @@ async function registerUser()  {
 }
 
 
-window.registerUser = registerUser  
+window.registerUser = registerUser
