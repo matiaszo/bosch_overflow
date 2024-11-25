@@ -3,6 +3,7 @@ package com.demo.repositories;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,7 @@ public interface SpaceRepository extends JpaRepository<Space, Long> {
 
     List<Space> findByTitle(String title);
     Space findById(long id);
+
+    // ! CÓDIGO DA EQUIPE DE INTEGRAÇÃO
+    public List<Space> findByTitleContains(String title, PageRequest req);
 }

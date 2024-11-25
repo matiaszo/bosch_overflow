@@ -1,5 +1,7 @@
 package com.demo.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.SpaceData;
+import com.demo.dto.SpaceGet;
 import com.demo.dto.Token;
 import com.demo.implementations.JWTImpl;
 import com.demo.implementations.PermissionImpl;
@@ -36,10 +39,11 @@ public class SpaceController {
     @Autowired
     JWTImpl jwtImpl;
 
-
+    // ! CÓDIGO MODIFICADO PELA EQUIPE DA INTEGRAÇÃO
     @GetMapping
-    public Page<Space> GetSpace(@RequestParam String query, @RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer size) {
-        return spaceService.getSpaces(query, page, size);
+    public ArrayList<SpaceGet> GetSpace (@RequestParam(defaultValue = "") String query, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+        // return spaceService.getSpaces(query, page, size);
+        return spaceService.getSpaces(query, page, limit);
     }
 
     @PostMapping // ! Belo nome 😁
