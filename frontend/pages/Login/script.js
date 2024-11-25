@@ -12,7 +12,7 @@ async function loginUser() {
 
     console.log(json)
 
-    const response = await fetch(
+    const response = await fetch (
         `${baseUrl}/auth`,
         {
             method: "POST",

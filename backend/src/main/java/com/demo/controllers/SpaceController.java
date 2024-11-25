@@ -53,6 +53,10 @@ public class SpaceController {
 
         Space space = spaceService.createNewSpace(token, data.title(), data.description());
 
+        if (space == null) {
+            return "Já existe um espaço com este nome!";
+        }
+
         spaceRepository.save(space);
 
         return "Space create!";
