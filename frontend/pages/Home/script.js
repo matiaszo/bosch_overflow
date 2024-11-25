@@ -1,21 +1,21 @@
 const baseUrl = "http://localhost:8080"
 
-async function loginUser() {
+async function postSpace() {
 
     let title = document.getElementById("spaceTitle").value
     let description = document.getElementById("spaceDesc").value
-    let token = document.body.
+    let token = localStorage.getItem("token")
 
     let json = JSON.stringify({
         "title" : title,
         "description" : description,
-        "token" : 
+        "token" : token
     })
 
     console.log(json)
 
     const response = await fetch(
-        `${baseUrl}/auth`,
+        `${baseUrl}/spaces`,
         {
             method: "POST",
             headers: {
@@ -28,8 +28,6 @@ async function loginUser() {
     let result = await response.text();
 
     console.log(result)
-
-    localStorage.setItem("token", "Bearer " + result)
 }
 
-window.loginUser = loginUser
+window.postSpace = postSpace

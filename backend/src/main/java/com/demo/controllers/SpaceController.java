@@ -42,7 +42,7 @@ public class SpaceController {
         return spaceService.getSpaces(query, page, size);
     }
 
-    @PostMapping
+    @PostMapping // ! Belo nome 😁
     public String postMethodName(@RequestBody SpaceData data) {
 
         Token token = jwtImpl.validate(data.token());
