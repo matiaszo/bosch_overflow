@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM Permission u WHERE u.user.id = :searchValue")
     List<Permission> searchPermissions(@Param("searchValue") Long searchValue);
 
-    @Query("SELECT u FROM Permission u WHERE u.user.id = :searchValue and u.space.id = :searchSpace")
+    @Query("SELECT p FROM Permission p WHERE p.user.id = :searchValue and p.space.id = :searchSpace")
     List<Permission> searchPermissionsSpaces(@Param("searchValue") Long searchValue, @Param("searchSpace") Long searchSpace);
 
     @Query("SELECT u FROM User u WHERE u.edv = :searchValue")

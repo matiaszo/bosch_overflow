@@ -1,10 +1,13 @@
 package com.demo.implementations;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import java.util.ArrayList;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+
+import com.demo.dto.QuestionGet;
+import com.demo.dto.Token;
 import com.demo.model.Question;
 import com.demo.model.Space;
 import com.demo.model.User;
@@ -28,29 +31,37 @@ public class QuestionImpl implements QuestionService {
     PermissionImpl permissionImpl;
 
     @Override
-    public Question createNewQuestion(String question, long spaceId, long userId) {
+    public Question createNewQuestion(Token token, String questionText, long spaceId) {
 
-    Space space = spaceRepository.findById(spaceId);
+        Space space = spaceRepository.findById(spaceId);
+        
+        Optional<User> findUser = userRepository.findById(token.getId());
 
-    User user = userRepository.findById(userId);
+        User user = findUser.get();
+
+        if (space == null) {
+            System.out.println("O espaço está nulo!");
+            return null; 
+        }
+
+        System.out.println(space.getId());
+
+        var permission = permissionImpl.validatePermission(user.getId(), spaceId);
+        System.out.println(permission);
+
+        if (permission == 0) {
+            System.out.println("Permissão inválida!");
+            return null;
+        }
+            
+        System.out.println("Aqui está o usuário" + user.getName());
+        Question question = new Question();
+        question.setQuestion(questionText);
+        question.setSpace(space);
+        question.setUser(user);
+        question.setPermission(permission);
     
-    if (space == null) {
-        return null; 
-    }
-
-    var permission = permissionImpl.validatePermission(userId, spaceId);
-
-    if (permission == 0) {
-        return null;
-    }
-
-    Question questions = new Question();
-    questions.setQuestion(question);
-    questions.setSpace(space);
-    questions.setUser(user);
-    questions.setPermission(permission);
-
-    return questions;
+        return question;
 }
 
 
@@ -77,11 +88,31 @@ public class QuestionImpl implements QuestionService {
     return question;
     }
 
-    @Override
-    public Page<Question> getQuestion(Long space, int page, int size) {
+    // @Override
+    // public Page<Question> getQuestion(Long space, int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        return questionRepository.searchQuestion(space, pageable);
+    //     Pageable pageable = PageRequest.of(page, size);
+    //     return questionRepository.searchQuestion(space, pageable);
+    // }
+
+
+    @Override
+    public ArrayList<QuestionGet> getQuestion(Long spaceId, Integer page, Integer limit) {
+        System.out.println(spaceId +  page + limit);
+        // findByNameContains: procura no banco por NOMES que CONTENHAM (%LIKE%) o parâmetro name
+        var results = questionRepository.findBySpaceId(spaceId, PageRequest.of(page, limit)); 
+
+        ArrayList<QuestionGet> list = new ArrayList<>();
+
+        for (int i = 0; i < results.size(); i++) {
+            list.add(new QuestionGet(results.get(i).getQuestion(), results.get(i).getId(), results.get(i).getUser().getId(), results.get(i).getUser().getName()));
+        }
+
+
+        // var resultado = spaceRepository.findAll(PageRequest.of(page, limit));
+        System.out.println(list);
+        
+        return list;
     }
 
     

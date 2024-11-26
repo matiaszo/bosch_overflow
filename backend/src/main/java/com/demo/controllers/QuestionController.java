@@ -4,18 +4,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.QuestionData;
+import com.demo.dto.QuestionGet;
 import com.demo.dto.Token;
 import com.demo.implementations.JWTImpl;
 import com.demo.model.Question;
 import com.demo.repositories.QuestionRepository;
 import com.demo.services.QuestionService;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,17 +52,21 @@ public class QuestionController {
     }
 
     @GetMapping
-    public Page<Question> GetQuestion(@RequestParam String query, @RequestParam long spaceId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+    public ArrayList<QuestionGet> GetQuestion(@RequestParam String query, @RequestParam long spaceId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
         return questionService.getQuestion(spaceId, page, size);
     }
 
 
     @PostMapping
-    public String postMethodName(@RequestBody QuestionData data) {
+    public String postMethodName(@RequestAttribute("token") Token token, @RequestBody QuestionData data) {
         
-        Question question = questionService.createNewQuestion(data.question(), data.spaceId(), data.userId());
-        
+        Question question = questionService.createNewQuestion(token, data.question(), data.spaceId());
+
+        if (question == null) {
+            return "Erro ao criar a pergunta!";
+        }
+
         questionRepository.save(question);
 
         return "question create ok!";

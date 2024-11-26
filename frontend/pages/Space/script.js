@@ -3,20 +3,17 @@ const baseUrl = "http://localhost:8080"
 async function postQuestion() {
 
     let question = document.getElementById("questionText").value
-    let token = localStorage.getItem("token").split(" ")
-
-    token = token[1]
+    let spaceId = localStorage.getItem("spaceId")
 
     let json = JSON.stringify({
-        "title": title,
-        "description": description,
-        "token": token
+        "question": question,
+        "spaceId": spaceId
     })
 
     console.log(json)
 
     const response = await fetch(
-        `${baseUrl}/spaces`,
+        `${baseUrl}/question`,
         {
             method: "POST",
             headers: {
@@ -31,7 +28,7 @@ async function postQuestion() {
 
     console.log(result)
 
-    if (result == "Já existe um espaço com este nome!") {
+    if (result == "Erro ao criar a pergunta!") {
         alert(result)
     } else {
         alert(result)
@@ -39,20 +36,20 @@ async function postQuestion() {
     }
 }
 
-window.postSpace = postSpaceconst
+window.postQuestion = postQuestion 
 
 baseurl = "http://localhost:8080"
 
 const renderQuestions = async () => {
 
-    const id = localStorage.getItem("questionId")
+    const id = localStorage.getItem("spaceId")
 
     console.log(id);
     console.log("ooo");
 
     try {
         const response = await fetch(
-            `${baseurl}/question?spaceId=${id}`,
+            `${baseUrl}/question?spaceId=${id}`,
             {
                 method: "GET",
                 headers: {

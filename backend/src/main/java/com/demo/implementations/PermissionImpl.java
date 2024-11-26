@@ -45,10 +45,14 @@ public class PermissionImpl implements PermissionService {
 
         List<Permission> permissionUsers = userRepository.searchPermissionsSpaces(idUser, idSpace);
 
+        System.out.println("A lista de usuários encontrada para validação de permissão: " + permissionUsers);
+
         if (permissionUsers.isEmpty()) {
+            System.out.println("Vish a lista estava vazia");
             return 0;
         }
-        if (permissionUsers.get(0).getAdm().equals(false)) {
+        if (permissionUsers.get(0).getAdm().equals(0)) {
+            System.out.println("Vish, a permissão do usuário era essa aqui ó: " + permissionUsers.get(0).getAdm());
             return 1;
         }
         return 2;
