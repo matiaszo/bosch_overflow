@@ -40,11 +40,29 @@ async function getSpaces() {
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${space.title}</h5>
                 <p class="card-text">${space.description}</p>
-                <a id="access_space_button" href="../Space/" class="btn btn-primary align-self-end">ACESSAR</a>
+                <a id="access_space_button" rel="keep-params" onclick="seeQuestion(${space.id})" class="btn btn-primary align-self-end">ACESSAR</a>
             </div>
         </div>`)
     })
 
 }
 
+function seeQuestion(id) {
+    // const url = new URL("http://127.0.0.1:5500/pages/Space");
+
+    // url.searchParams.set("spaceId", id);    // Use URLSearchParams to add query param
+    // url.searchParams.set("query", "");      // Use URLSearchParams to add query param
+    // url.searchParams.set("page", 1);        // Use URLSearchParams to add query param
+    // url.searchParams.set("size", 2);        // Use URLSearchParams to add query param
+
+    // window.location.href = url.href;
+
+    // INFELIZMENTE SERÁ NECESSÁRIA UMA GAMBIARRA
+
+    localStorage.setItem("questionId", id)
+
+    window.location.href = "../Space"
+}   
+
+document.seeQuestion = seeQuestion
 document.addEventListener("DOMContentLoaded", renderSpaces)
