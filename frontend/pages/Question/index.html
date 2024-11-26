@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <header class="position-fixed w-100 z-1 bg-light top-0">
+        <header class="position-fixed w-100 z-1 bg-light top-0 z-10">
             <nav class="navbar border-bottom border-5 border-black shadow">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center gap-3">
@@ -39,7 +39,7 @@
                 <!-- PERGUNTA SELECIONADA -->
                 <div class="card col-12 col-md-9 col-lg-6">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">TITULO DA PERGUNTA</h5>
+                        <h5 class="card-title" id="questionUser">Nome do Usuário</h5>
                         <p class="card-text">Pra que serve tantos códigos? Se a vida não é programada e as melhores coisas
                             não tem lógica</p>
                     </div>
@@ -59,14 +59,11 @@
                                 <button type="submit" class="btn btn-success" style="width: 80px;">Enviar</button>
                             </div>
                             <!-- ----------------------------- -->
-
                         </li>
 
                         <!-- COMPONENTE PARA RESPOSTA -->
-                        <li class="list-group-item">
-                            <h6>ChatGPT (NOME DO USUÁRIO)</h6>
-                            <p>A vida não é programada, mas os códigos fazem a máquina funcionar. A lógica pode não ser a
-                                melhor amiga dos momentos espontâneos, mas sem ela, até o Wi-Fi falha. (RESPOSTA)</p>
+                        <li class="list-group-item" id="answers">
+                            
                         </li>
                         <!-- ------------------------ -->
 

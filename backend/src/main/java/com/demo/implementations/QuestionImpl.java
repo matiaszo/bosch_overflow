@@ -44,17 +44,16 @@ public class QuestionImpl implements QuestionService {
             return null; 
         }
 
-        System.out.println(space.getId());
+        System.out.println("Space ID: " + space.getId());
 
         var permission = permissionImpl.validatePermission(user.getId(), spaceId);
-        System.out.println(permission);
+        System.out.println("Permission: " + permission);
 
         if (permission == 0) {
             System.out.println("Permissão inválida!");
             return null;
         }
             
-        System.out.println("Aqui está o usuário" + user.getName());
         Question question = new Question();
         question.setQuestion(questionText);
         question.setSpace(space);
@@ -98,16 +97,21 @@ public class QuestionImpl implements QuestionService {
 
     @Override
     public ArrayList<QuestionGet> getQuestion(Long spaceId, Integer page, Integer limit) {
-        System.out.println(spaceId +  page + limit);
+        System.out.println("Os mano espaço, pagina e limite: " + spaceId + page + limit);
         // findByNameContains: procura no banco por NOMES que CONTENHAM (%LIKE%) o parâmetro name
-        var results = questionRepository.findBySpaceId(spaceId, PageRequest.of(page, limit)); 
+        var results = questionRepository.findBySpaceId(spaceId, PageRequest.of(page, limit));
+
+        String spaceName = spaceRepository.findById(spaceId).get().getTitle();
 
         ArrayList<QuestionGet> list = new ArrayList<>();
 
         for (int i = 0; i < results.size(); i++) {
-            list.add(new QuestionGet(results.get(i).getQuestion(), results.get(i).getId(), results.get(i).getUser().getId(), results.get(i).getUser().getName()));
+            list.add(new QuestionGet(results.get(i).getQuestion(), results.get(i).getId(), results.get(i).getUser().getId(), results.get(i).getUser().getName(), spaceName));
         }
 
+        if (list.size() == 0) {
+            list.add(new QuestionGet(null, null, null, null, spaceName));
+        }
 
         // var resultado = spaceRepository.findAll(PageRequest.of(page, limit));
         System.out.println(list);

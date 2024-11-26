@@ -45,11 +45,10 @@ const renderQuestions = async () => {
     const id = localStorage.getItem("spaceId")
 
     console.log(id);
-    console.log("ooo");
 
     try {
         const response = await fetch(
-            `${baseUrl}/question?spaceId=${id}`,
+            `${baseUrl}/question?query=''&page=0&spaceId=${id}&limit=10`,
             {
                 method: "GET",
                 headers: {
@@ -61,22 +60,30 @@ const renderQuestions = async () => {
 
         const data = await response.json();
 
-        if (response.ok) {
+        console.log(data)
+
+        if (data) {
 
             var div = document.getElementById("questions")
 
-            response.array.forEach(element => {
-                div.insertAdjacentHTML("beforeend", 
-                    `
-                        <div class="card col-12 col-md-9 col-lg-6">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${element.question}</h5>
-                                <p class="card-text">${element.question}</p>
-                                <a href="../Question/" class="btn btn-secondary align-self-end">VER RESPOSTAS</a>
+            var spaceNameDiv = document.getElementById("spaceName")
+
+            spaceNameDiv.innerText = data[0].spaceName
+
+            if (data[0].description != null) {
+                data.forEach(element => {
+                    div.insertAdjacentHTML("beforeend", 
+                        `
+                            <div class="card col-12 col-md-9 col-lg-6">
+                                <div class="card-body d-flex flex-column">
+                                    <b class="card-title">${element.username}</b>
+                                    <p class="card-text">${element.description}</p>
+                                    <a href="../Question/" class="btn btn-secondary align-self-end">VER RESPOSTAS</a>
+                                </div>
                             </div>
-                        </div>
-                    `)
-            });
+                        `)
+                });
+            }
 
         } else {
             console.error('Error:', data);

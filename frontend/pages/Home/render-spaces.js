@@ -57,7 +57,7 @@ function seeQuestion(id) {
 
     // window.location.href = url.href;
 
-    // INFELIZMENTE SERÁ NECESSÁRIA UMA GAMBIARRA
+    // INFELIZMENTE SERÁ NECESSÁRIA UMA GAMBIARRA :(
 
     localStorage.setItem("spaceId", id)
 
