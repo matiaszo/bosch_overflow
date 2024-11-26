@@ -1,8 +1,9 @@
 package com.demo.controllers;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +59,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Page<User> FindUser(@RequestParam String query,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+    public ArrayList<User> FindUser(@RequestParam String query,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
         return userService.getUsers(query, page, size);
 

@@ -97,7 +97,6 @@ const renderQuestions = async () => {
 async function getUsers() {
     const id = localStorage.getItem("spaceId")
 
-    try {
         const response = await fetch (
             `${baseUrl}/user?query=''&page=0&size=100`,
             {
@@ -111,19 +110,25 @@ async function getUsers() {
 
         const data = await response.json();
 
+        console.log(data);
+
         var div = document.getElementById("usersList")
 
         data.forEach(element => {
+            div.insertAdjacentHTML("beforeend",
             `
-            <h6>${element.}</h6>
-            <div class="d-flex flex-column flex-lg-row justify-content-end align-items-end gap-2">
-                <button id="set_admin_button" class="btn btn-light">Adminstrador</button>
-                <button id="set_member_button" class="btn btn-light">Membro</button>
-                <button id="set_none_button" class="btn btn-light">Desconhecido</button>
+            <div class="d-flex gap-3 w-75 justify-content-between">
+                <h6>${element.name}</h6>
+                <div class="d-flex flex-column flex-lg-row justify-content-end align-items-end gap-2">
+                    <button id="set_admin_button" class="btn btn-light">Adminstrador</button>
+                    <button id="set_member_button" class="btn btn-light">Membro</button>
+                    <button id="set_none_button" class="btn btn-light">Desconhecido</button>
+                </div>
             </div>
             `
+        )
         })
-    }
+    
 }
 
 function seeAnswers(id) {
@@ -133,3 +138,5 @@ function seeAnswers(id) {
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestions)
+
+window.getUsers

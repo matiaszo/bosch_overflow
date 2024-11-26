@@ -34,7 +34,7 @@
     <div class="p-4 text-dark position-absolute top-0 d-flex justify-content-between w-100 align-items-center" style="margin-top: 90px;">
       <a href="../Space/" id="spaceName" class="navbar-brand text-dark fw-bold fs-3">NOME DO ESPAÇO</a>
 
-      <button data-bs-target="#showUsers" data-bs-toggle="modal" class="p-3"
+      <button data-bs-target="#showUsers" data-bs-toggle="modal" class="p-3" onclick="getUsers()"
         style="border: none; background-color: transparent;">
         <img src="../../assets/users.png" class="" style="width: 70px;" alt="users">
       </button>
@@ -109,17 +109,11 @@
 
 
               <div class="card w-100">
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush flex flex-col">
 
                   <!-- COMPONENTE DE USUÁRIO -->
                   <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center" id="usersList">
-                      <h6>NOME DO USUÁRIO</h6>
-                      <div class="d-flex flex-column flex-lg-row justify-content-end align-items-end gap-2">
-                        <button id="set_admin_button" class="btn btn-light">Adminstrador</button>
-                        <button id="set_member_button" class="btn btn-light">Membro</button>
-                        <button id="set_none_button" class="btn btn-light">Desconhecido</button>
-                      </div>
+                    <div class="d-flex flex-column justify-content-between align-items-center gap-4" id="usersList">
                     </div>
                   </li>
                   <!-- ---------------------- -->
