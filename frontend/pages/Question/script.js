@@ -1,43 +1,42 @@
 const baseUrl = "http://localhost:8080"
 
-async function postSpace() {
+async function getQuestion() {
 
-    let title = document.getElementById("spaceTitle").value
-    let description = document.getElementById("spaceDesc").value
-    let token = localStorage.getItem("token").split(" ")
-
-    token = token[1]
-
-    let json = JSON.stringify({
-        "title" : title,
-        "description" : description,
-        "token" : token
-    })
-
-    console.log(json)
+    let questionId = localStorage.getItem("questionId")
 
     const response = await fetch(
-        `${baseUrl}/spaces`,
+        `${baseUrl}/question/${questionId}`,
         {
-            method: "POST",
+            method: "GET",
             headers: {
                 "Authorization" : localStorage.getItem("token"),
-                "Content-Type": "application/json"
-            },
-            body: json
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            }
         }
     )
 
-    let result = await response.text();
-
-    console.log(result)
-
-    if (result == "Já existe um espaço com este nome!") {
-        alert(result)
-    } else {
-        alert(result)
-        window.location.reload()
-    }
+    return await response.json();
 }
 
-window.postSpace = postSpace
+async function postAnswer() {
+    
+    let answerText = document.getElementById("answerText")
+    let questionId = localStorage.getItem("questionId")
+}
+
+async function renderQuestion() {
+    const question = await getQuestion();
+
+    console.log(question)
+
+    let spaceTitleDiv = document.getElementById("spaceTitle")
+    let questionUserDiv = document.getElementById("questionUser")
+    let questionTextDiv = document.getElementById("questionText")
+
+    spaceTitleDiv.innerText = question.spaceName
+    questionUserDiv.innerText = question.username
+    questionTextDiv.innerText = question.description
+}
+
+document.addEventListener("DOMContentLoaded", renderQuestion)

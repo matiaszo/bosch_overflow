@@ -5,13 +5,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.dto.QuestionData;
 import com.demo.dto.QuestionGet;
+import com.demo.dto.QuestionSingleGet;
 import com.demo.dto.Token;
 import com.demo.implementations.JWTImpl;
 import com.demo.model.Question;
+import com.demo.model.Space;
+import com.demo.model.User;
 import com.demo.repositories.QuestionRepository;
 import com.demo.services.QuestionService;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.demo.implementations.PermissionImpl;
 import com.demo.repositories.SpaceRepository;
+import com.demo.repositories.UserRepository;
 
 
 @RestController
@@ -43,12 +48,24 @@ public class QuestionController {
     PermissionImpl permissionImpl;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     JWTImpl jwtImpl;
 
     @GetMapping("/{id}")
-    public Question GetQuestionById(@PathVariable Long id) {
+    public QuestionSingleGet GetQuestionById(@PathVariable Long id) {
 
-        return questionService.getQuestionById(id);
+        Question question = questionService.getQuestionById(id);
+
+        Optional<User> getUser = userRepository.findById(question.getUser().getId());
+
+        Optional<Space> getSpace = spaceRepository.findById(question.getSpace().getId());
+
+        User user = getUser.get();
+        Space space = getSpace.get(); 
+
+        return new QuestionSingleGet(user.getName(), question.getQuestion(), space.getTitle());
     }
 
     @GetMapping
