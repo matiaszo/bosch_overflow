@@ -39,7 +39,9 @@ async function postQuestion() {
     }
 }
 
-window.postSpace = postSpaceconst baseurl = "http://localhost:8080"
+window.postSpace = postSpaceconst 
+
+baseurl = "http://localhost:8080"
 
 const renderQuestions = async ( ) => {
     const id = new URLSearchParams(window.location.search).get("spaceId");
