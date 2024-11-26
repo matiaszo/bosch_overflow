@@ -21,7 +21,7 @@ async function getQuestion() {
 
 async function postAnswer() {
     
-    let answerText = document.getElementById("answerText")
+    let answerText = document.getElementById("answerText").value
     let questionId = localStorage.getItem("questionId")
 
     let json = JSON.stringify ({
@@ -36,14 +36,23 @@ async function postAnswer() {
         {
             method: "POST",
             headers: {
-                "Authorization" : localStorage.getItem("token")
-            }
+                "Authorization" : localStorage.getItem("token"),
+                "Content-Type": "application/json"
+            },
+            body: json
         }
     )
+
+    let result = await response.text()
+
+    console.log(result)
+    alert(result)
 }
 
+window.postAnswer = postAnswer
+
 async function renderQuestion() {
-    const question = await getQuestion();
+    const question = await getQuestion()
 
     console.log(question)
 

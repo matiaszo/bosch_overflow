@@ -94,6 +94,38 @@ const renderQuestions = async () => {
 
 }
 
+async function getUsers() {
+    const id = localStorage.getItem("spaceId")
+
+    try {
+        const response = await fetch (
+            `${baseUrl}/user?query=''&page=0&size=100`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": localStorage.getItem("token"),
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        var div = document.getElementById("usersList")
+
+        data.forEach(element => {
+            `
+            <h6>${element.}</h6>
+            <div class="d-flex flex-column flex-lg-row justify-content-end align-items-end gap-2">
+                <button id="set_admin_button" class="btn btn-light">Adminstrador</button>
+                <button id="set_member_button" class="btn btn-light">Membro</button>
+                <button id="set_none_button" class="btn btn-light">Desconhecido</button>
+            </div>
+            `
+        })
+    }
+}
+
 function seeAnswers(id) {
     localStorage.setItem("questionId", id)
 

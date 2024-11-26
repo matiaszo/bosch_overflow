@@ -28,8 +28,10 @@ public class AnswerController {
     public String postAnswer(@RequestBody AnswerData data) {
         
         Answer answer = answerService.createNewAnswer(data.questionId(), data.answer());
-        
-        answerRepository.save(answer);
+
+        if (answer == null) {
+            return "Ocorreu um erro ao criar a resposta!"; 
+        }
 
         return "answer create ok!";
     }
