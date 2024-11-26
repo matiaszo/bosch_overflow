@@ -78,7 +78,7 @@ const renderQuestions = async () => {
                                 <div class="card-body d-flex flex-column">
                                     <b class="card-title">${element.username}</b>
                                     <p class="card-text">${element.description}</p>
-                                    <a href="../Question/" class="btn btn-secondary align-self-end">VER RESPOSTAS</a>
+                                    <a onclick="seeAnswers(${element.questionId})" class="btn btn-secondary align-self-end">VER RESPOSTAS</a>
                                 </div>
                             </div>
                         `)
@@ -92,6 +92,12 @@ const renderQuestions = async () => {
         console.error('Error:', error);
     }
 
+}
+
+function seeAnswers(id) {
+    localStorage.setItem("questionId", id)
+
+    window.location.href = "../Question"
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestions)
