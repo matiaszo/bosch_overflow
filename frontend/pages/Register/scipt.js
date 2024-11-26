@@ -26,7 +26,17 @@ async function registerUser()  {
         }
     )    
 
-    console.log(response.data);
+    let data = await response.json()
+
+    console.log(data);
+    console.log(response);
+    
+    alert("Usuário criado com sucesso!")
+
+    window.location.href = "../Login"
+
+
+
 }
 
 
