@@ -40,7 +40,7 @@ public class SpaceController {
 
     // ! CÓDIGO MODIFICADO PELA EQUIPE DA INTEGRAÇÃO
     @GetMapping
-    public ArrayList<SpaceGet> GetSpace (@RequestParam(defaultValue = "") String query, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+    public ArrayList<SpaceGet> GetSpace (@RequestParam(defaultValue = "") String query, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "100") Integer limit) {
         // return spaceService.getSpaces(query, page, size);
         return spaceService.getSpaces(query, page, limit);
     }

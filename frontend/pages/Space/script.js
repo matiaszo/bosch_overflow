@@ -48,7 +48,7 @@ const renderQuestions = async () => {
 
     try {
         const response = await fetch(
-            `${baseUrl}/question?query=''&page=0&spaceId=${id}&limit=10`,
+            `${baseUrl}/question?query=''&page=0&spaceId=${id}&limit=`,
             {
                 method: "GET",
                 headers: {

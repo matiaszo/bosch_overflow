@@ -23,6 +23,23 @@ async function postAnswer() {
     
     let answerText = document.getElementById("answerText")
     let questionId = localStorage.getItem("questionId")
+
+    let json = JSON.stringify ({
+        "answer" : answerText,
+        "questionId" : questionId
+    })
+
+    console.log(json)
+
+    const response = await fetch (
+        `${baseUrl}/answer`, 
+        {
+            method: "POST",
+            headers: {
+                "Authorization" : localStorage.getItem("token")
+            }
+        }
+    )
 }
 
 async function renderQuestion() {
