@@ -8,9 +8,9 @@ async function postQuestion() {
     token = token[1]
 
     let json = JSON.stringify({
-        "title" : title,
-        "description" : description,
-        "token" : token
+        "title": title,
+        "description": description,
+        "token": token
     })
 
     console.log(json)
@@ -20,7 +20,7 @@ async function postQuestion() {
         {
             method: "POST",
             headers: {
-                "Authorization" : localStorage.getItem("token"),
+                "Authorization": localStorage.getItem("token"),
                 "Content-Type": "application/json"
             },
             body: json
@@ -39,13 +39,15 @@ async function postQuestion() {
     }
 }
 
-window.postSpace = postSpaceconst 
+window.postSpace = postSpaceconst
 
 baseurl = "http://localhost:8080"
 
-const renderQuestions = async ( ) => {
-    const id = new URLSearchParams(window.location.search).get("spaceId");
-    console.log(id); //
+const renderQuestions = async () => {
+
+    const id = localStorage.getItem("questionId")
+
+    console.log(id);
     console.log("ooo");
 
     try {
@@ -63,14 +65,29 @@ const renderQuestions = async ( ) => {
         const data = await response.json();
 
         if (response.ok) {
-            window.location.href = "../meus-pacientes";
+
+            var div = document.getElementById("questions")
+
+            response.array.forEach(element => {
+                div.insertAdjacentHTML("beforeend", 
+                    `
+                        <div class="card col-12 col-md-9 col-lg-6">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${element.question}</h5>
+                                <p class="card-text">${element.question}</p>
+                                <a href="../Question/" class="btn btn-secondary align-self-end">VER RESPOSTAS</a>
+                            </div>
+                        </div>
+                    `)
+            });
+
         } else {
             console.error('Error:', data);
         }
     } catch (error) {
         console.error('Error:', error);
     }
-    
+
 }
 
 document.addEventListener("DOMContentLoaded", renderQuestions)
